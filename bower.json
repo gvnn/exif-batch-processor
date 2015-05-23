@@ -1,0 +1,19 @@
+{
+  "name": "exif-batch-processor",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gvnn/exif-batch-processor",
+  "authors": [
+    "Giovanni Ferron <gvnnrulez@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
