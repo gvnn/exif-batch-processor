@@ -1,5 +1,7 @@
 # EXIF Batch Processor
 
+[![Build Status](https://travis-ci.org/gvnn/exif-batch-processor.svg)](https://travis-ci.org/gvnn/exif-batch-processor)
+
 Batch processor that takes the input file and produces a single HTML file for each camera make, camera model and also an index.
 
 
