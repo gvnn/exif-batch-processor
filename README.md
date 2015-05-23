@@ -26,4 +26,6 @@ Each Camera Model HTML page contains
 
 - Test: `rspec spec/`
 
-- Run: `./ebp.rb gen -i [location input file] -o [output folder]`
+- Command line: `./ebp.rb gen -i [location input file] -o [output folder] -e [exif data file name]`
+
+- Sample: `./ebp.rb gen -e exif_sample.xml -i data/input -o data/output`

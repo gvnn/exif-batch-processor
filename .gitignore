@@ -19,5 +19,8 @@ Gemfile.lock
 .idea/
 data/input/*
 !data/input/.gitkeep
+!data/input/exif_sample.xml
 data/output/*
 !data/output/.gitkeep
+res/components/*
+!res/components/.gitkeep
