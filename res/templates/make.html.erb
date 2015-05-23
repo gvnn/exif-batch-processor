@@ -9,11 +9,17 @@
 </head>
 <body>
 <div class="container">
+  <ol class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li><%= make.name %></li>
+  </ol>
+  <h2><%= make.name %></h2>
+
   <div class="row">
     <div class="col-sm-8">
-      <h2>Top 10 images</h2>
+
       <div class="row">
-        <% images.first(10).each do |obj| %>
+        <% make.images.first(10).each do |key, obj| %>
             <div class="col-sm-6 col-md-4">
               <a href="#" class="thumbnail">
                 <img src="<%= obj.thumbnails[1] %>">
@@ -23,13 +29,14 @@
       </div>
     </div>
     <div class="col-sm-3 col-sm-offset-1">
-      <h4>Camera makes</h4>
+      <h4>Camera models</h4>
+
       <div class="row">
         <ul>
-          <% makes.each do |key, value| %>
+          <% make.models.each do |model| %>
               <li>
-                <a href="<%= value.name.to_slug %>.html">
-                  <%= value.name %>
+                <a href="<%= "#{make.name.to_slug}-#{model.name.to_slug}" %>.html">
+                  <%= model.name %>
                 </a>
               </li>
           <% end %>
