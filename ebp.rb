@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 require 'thor'
 require_relative 'lib/exif_processor'
+require_relative 'lib/to_slug'
+
+# include slug utility
+String.send(:include, ToSlug)
 
 class ExifProcessorConsole < Thor
 
