@@ -1,4 +1,7 @@
 language: ruby
 rvm:
   - 2.2.2
+before_script:
+  - npm install bower
+  - bower install
 script: bundle exec rspec spec
