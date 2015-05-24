@@ -1,4 +1,4 @@
-require_relative '../lib/to_slug'
+require_relative 'spec_helper'
 
 String.send(:include, ToSlug)
 
