@@ -1,3 +1,5 @@
+require 'i18n'
+
 module ToSlug
 
   # Generate a slug for the string +value+.
@@ -15,9 +17,10 @@ module ToSlug
   # --
   # @api public
   def to_slug
+    I18n.enforce_available_locales = false
     # Perform transliteration to replace non-ascii characters with an ascii
     # character
-    value =  self.scrub('').gsub(/[^\x00-\x7F]/n, '').to_s
+    value =  I18n.transliterate(self).scrub('').gsub(/[^\x00-\x7F]/n, '').to_s
 
     # Remove single quotes from input
     value.gsub!(/[']+/, '')
