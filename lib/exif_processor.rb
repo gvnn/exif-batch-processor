@@ -19,13 +19,14 @@ class ExifProcessor
   end
 
   def process_xml_file
-    @logger.debug @exif_file_full_path
+    @logger.debug "Processing #{@exif_file_full_path}"
     #check files exists
     if File.file?(@exif_file_full_path)
       parsed_data = import_exif_works
       clean_output_folder
       generate_files(parsed_data)
       copy_assets
+      @logger.debug "Complete!"
     else
       @logger.error "Can't find file #{@exif_file_full_path}"
       false
@@ -34,6 +35,7 @@ class ExifProcessor
 
   def copy_assets
     static_output_folder = "#{@output_folder}/assets"
+    @logger.debug "Copying static assets to #{static_output_folder}"
     unless File.directory?(static_output_folder)
       FileUtils.mkdir_p(static_output_folder)
     end
@@ -42,6 +44,7 @@ class ExifProcessor
   end
 
   def generate_files(data)
+    @logger.debug 'Starting rendering'
     # generate the index
     render('index', data, 'index')
     # generate the make files
@@ -51,23 +54,28 @@ class ExifProcessor
       # generate the model files
       value.models.each { |model| render('model', {:model => model, :make => value}, "#{value.name.to_slug}-#{model.name.to_slug}") }
     }
+    @logger.debug 'Render complete'
   end
 
   def clean_output_folder
+    @logger.debug "Clean output folder #{@output_folder}"
     FileUtils.rm Dir.glob("#{@output_folder}/*.html")
     FileUtils.rm_rf Dir.glob("#{@output_folder}/assets")
   end
 
   def import_exif_works
+    @logger.debug 'Start parsing'
     handler = ExifWorkParser.new(@logger)
     input = File.open(@exif_file_full_path)
     Ox.sax_parse(handler, input)
+    @logger.debug 'Parsing complete'
     handler.get_parsed_data
   end
 
   private
 
   def render(template, data, filename)
+    @logger.debug "Rendering template #{template} >> #{filename}"
     template = Tilt::ERBTemplate.new("res/templates/#{template}.html.erb")
     File.open(File.join(@output_folder, "#{filename}.html"), "w") do |f|
       f << template.render(Object.new, data)

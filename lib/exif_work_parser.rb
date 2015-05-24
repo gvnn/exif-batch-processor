@@ -13,10 +13,12 @@ class ExifWorkParser < ::Ox::Sax
     @images = []
   end
 
+  # returns a hash with parsed data
   def get_parsed_data
     {:makes => @makes.sort.to_h, :images => @images}
   end
 
+  # called at the beginning of xml element
   def start_element(name)
     @current_node = name.to_s
     if name.to_s == 'work'
@@ -24,12 +26,14 @@ class ExifWorkParser < ::Ox::Sax
     end
   end
 
+  # called at end of element
   def end_element(name)
     if name.to_s == 'work'
       save_work
     end
   end
 
+  # called when the parser finds text in a XML element
   def text(value)
     string_value = value.to_s
     case @current_node.to_s
@@ -46,6 +50,7 @@ class ExifWorkParser < ::Ox::Sax
 
   private
 
+  # resets the current work variables
   def new_work
     @current_make = 'UNKNOWN'
     @current_model = 'UNKNOWN'
@@ -57,19 +62,21 @@ class ExifWorkParser < ::Ox::Sax
     end
   end
 
+  # saves the work data into the hash
   def save_work
     @logger.debug "Saving work #{@current_image_id}, #{@current_image_thumbs.count} images, make: #{@current_make}, model: #{@current_model}"
     # creating new make and model
     camera_make = add_make(@current_make)
     camera_model = camera_make.add_model(@current_model)
     # new image
-    image = CameraImage.new(@current_image_id.to_i, @current_image_thumbs)
+    image = CameraImage.new(@current_image_id.to_i, @current_image_thumbs.clone)
     @images << image
     # add image to make and models
     camera_make.add_image(image)
     camera_model.add_image(image)
   end
 
+  # creates a new make object
   def add_make(name)
     unless @makes.has_key?(name)
       camera_make = CameraMake.new(name)
