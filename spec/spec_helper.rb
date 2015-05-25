@@ -1,5 +1,6 @@
 require_relative '../lib/camera_model'
 require_relative '../lib/camera_image'
+require_relative '../lib/camera_make'
 require_relative '../lib/to_slug'
 require 'faker'
 require 'rspec'

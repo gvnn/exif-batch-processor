@@ -14,7 +14,7 @@ class CameraMake
   # @param model_name String model name
   def add_model(model_name)
     # look for a model with same same
-    model = @models.first { |m| m.name == model_name }
+    model = @models.find { |m| m.name == model_name }
     if model.nil?
       # not found, new model
       model = CameraModel.new(model_name)
