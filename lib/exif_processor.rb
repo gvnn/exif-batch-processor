@@ -33,6 +33,8 @@ class ExifProcessor
     end
   end
 
+  private
+
   def copy_assets
     static_output_folder = "#{@output_folder}/assets"
     @logger.debug "Copying static assets to #{static_output_folder}"
@@ -71,8 +73,6 @@ class ExifProcessor
     @logger.debug 'Parsing complete'
     handler.get_parsed_data
   end
-
-  private
 
   def render(template, data, filename)
     @logger.debug "Rendering template #{template} >> #{filename}"
