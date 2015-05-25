@@ -22,10 +22,12 @@ Each Camera Model HTML page contains
 
 ## Dependencies, Test and Run
 
-- Dependencies: `bundle install`
+The application requires [bundler](http://bundler.io) and [bower](http://bower.io)
 
-- Test: `rspec spec/`
+- Dependencies install: `bundle install && bower install`
 
-- Command line: `./ebp.rb gen -i [location input file] -o [output folder] -e [exif data file name]`
+- Test: `rspec`
+
+- Command line: `./ebp.rb help`
 
 - Sample: `./ebp.rb gen -e exif_sample.xml -i data/input -o data/output`
